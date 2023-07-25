@@ -10,11 +10,13 @@ export const App = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    const contacts = localStorage.getItem('My-Contacts');
+    const contactsFromLS = localStorage.getItem('My-Contacts');
 
     try {
-      const parsedContacts = JSON.parse(contacts) || [];
-      setContacts(parsedContacts);
+      const parsedContacts = JSON.parse(contactsFromLS) || [];
+      if (contacts.length !== parsedContacts.length) {
+        setContacts(parsedContacts);
+      }
     } catch (error) {
       console.log('error', error);
     }
@@ -33,7 +35,7 @@ export const App = () => {
         phone: newNumber,
       };
 
-      setContacts(...contacts, newPersonContact);
+      setContacts([...contacts, newPersonContact]);
 
       Notify.success(`${newContact} has been added to your Phonebook`);
     } else {
@@ -42,9 +44,11 @@ export const App = () => {
   };
 
   const deleteContact = id => {
-    const contact = setContacts(contacts.filter(contact => id !== contact.id));
-
-    Notify.failure(`${contact.name} has been deleted`);
+    const contact = contacts.find(contact => id === contact.id);
+    if (contact) {
+      Notify.failure(`${contact.name} has been deleted`);
+      setContacts(contacts.filter(contact => id !== contact.id));
+    }
   };
 
   const filterContacts = newFilter => {
