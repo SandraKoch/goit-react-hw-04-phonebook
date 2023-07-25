@@ -6,21 +6,10 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useState, useEffect } from 'react';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() => {
+    initializeContactsFromLS();
+  });
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const contactsFromLS = localStorage.getItem('My-Contacts');
-
-    try {
-      const parsedContacts = JSON.parse(contactsFromLS) || [];
-      if (contacts.length !== parsedContacts.length) {
-        setContacts(parsedContacts);
-      }
-    } catch (error) {
-      console.log('error', error);
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('My-Contacts', JSON.stringify(contacts));
@@ -53,6 +42,20 @@ export const App = () => {
 
   const filterContacts = newFilter => {
     setFilter(newFilter);
+  };
+
+  const initializeContactsFromLS = () => {
+    const contactsFromLS = localStorage.getItem('My-Contacts');
+    console.log('contactsFromLS', contactsFromLS);
+
+    try {
+      const parsedContacts = JSON.parse(contactsFromLS) || [];
+      console.log('parsedContacts', parsedContacts);
+
+      return parsedContacts;
+    } catch (error) {
+      console.log('error', error);
+    }
   };
 
   return (
