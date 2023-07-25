@@ -1,0 +1,7 @@
+.contactList {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light-color);
+  margin: 10px;
+  border-radius: 6px;
+}

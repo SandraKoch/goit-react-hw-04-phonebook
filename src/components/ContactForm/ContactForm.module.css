@@ -1,0 +1,33 @@
+.formWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding: 30px;
+  border: 3px solid var(--light-color);
+  margin: 10px;
+  border-radius: 6px;
+  background-color: var(--light-color);
+  gap: 30px;
+}
+
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+}
+
+.submitBtn {
+  cursor: pointer;
+  border-radius: 4px;
+  min-width: 178px;
+  padding: 12px;
+  border: none;
+  background-color: var(--btn-color);
+  color: var(--light-color);
+}
+
+.submitBtn:hover {
+  color: var(--primary-color);
+  background-color: var(--btn-active);
+  border: 1px solid var(--bg-color);
+}
