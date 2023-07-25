@@ -6,9 +6,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useState, useEffect } from 'react';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    initializeContactsFromLS();
-  });
+  const [contacts, setContacts] = useState(() => initializeContactsFromLS());
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -55,6 +53,7 @@ export const App = () => {
       return parsedContacts;
     } catch (error) {
       console.log('error', error);
+      return [];
     }
   };
 
