@@ -42,21 +42,6 @@ export const App = () => {
     setFilter(newFilter);
   };
 
-  const initializeContactsFromLS = () => {
-    const contactsFromLS = localStorage.getItem('My-Contacts');
-    console.log('contactsFromLS', contactsFromLS);
-
-    try {
-      const parsedContacts = JSON.parse(contactsFromLS) || [];
-      console.log('parsedContacts', parsedContacts);
-
-      return parsedContacts;
-    } catch (error) {
-      console.log('error', error);
-      return [];
-    }
-  };
-
   return (
     <div
       style={{
@@ -79,3 +64,18 @@ export const App = () => {
     </div>
   );
 };
+
+function initializeContactsFromLS() {
+  const contactsFromLS = localStorage.getItem('My-Contacts');
+  console.log('contactsFromLS', contactsFromLS);
+
+  try {
+    const parsedContacts = JSON.parse(contactsFromLS) || [];
+    console.log('parsedContacts', parsedContacts);
+
+    return parsedContacts;
+  } catch (error) {
+    console.log('error', error);
+    return [];
+  }
+}
